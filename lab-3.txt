@@ -1,0 +1,258 @@
+##file-handling##
+
+<html>
+<head>
+    <title> Registertion-form</title>
+</head>
+<body>
+ <?php
+if(isset($_POST["set"]))
+{
+    $Firstname=$_POST["firstname"];
+    $Lastname=$_POST["lastname"];
+    $Gender=$_POST["gender"];
+    $Username=$_POST["uname"];
+    $Password=$_POST["pwd"];
+    $Email=$_POST["email"];
+    $RecoveryEmailAddress=$_POST["rmail"];
+
+    if(empty($Firstname) or empty($Lastname) or empty($Gender) or
+    empty($Username) or empty($Password) or empty($Email) or empty($RecoveryEmailAddress) )
+    {
+       echo "Please empty details <br>";
+    }
+    else {
+				echo "<script>location.href='login.php'</script>";
+		}
+   
+    
+}
+/*if(isset($_POST["done"]))
+{
+    echo "<script>location.href='login.php'</script>";
+    
+}*/
+?>
+    <form action="file handling.php" method ="POST">
+        <h1 style="text-align: center;">Registertion-form</h1>
+
+        <fieldset>
+            <legend>Basic Information:</legend>
+            <table>
+                <tr>
+                    <td>
+                        Firstname
+                    </td>
+                    <td>
+                        <input type="text" name="firstname">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Lastname
+                    </td>
+                    <td>
+                        <input type="text" name="lastname">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Gender
+                    </td>
+                    <td>
+                        <input type="radio" name="gender">Male
+                        <input type="radio" name="gender">Female
+                    </td>
+                </tr>
+
+            
+
+            </table>
+        </fieldset>
+
+        <fieldset>
+            <legend>User Account Information:</legend>
+            <table>
+                    <td>
+                        Username 
+                    </td>
+                    <td>
+                        <input type="text" name="uname">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Password :
+                    </td>
+                    <td>
+                        <input type="password" name="pwd">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Email
+                    </td>
+                    <td>
+                        <input type="email " name="email">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        RecoveryEmailAddress
+                    </td>
+                    <td>
+                        <input type="email " name="rmail">
+                    </td>
+                </tr>
+
+                
+            </table>
+        </fieldset>
+        </table>
+        </fieldset>
+
+        <input  type="submit" name="set" value="submit">
+        <input  type="submit" name="done" value="Reset">  
+    </form>
+<?php
+    
+    extract($_REQUEST);
+    $file=fopen("features.txt","a");
+   
+    
+    fwrite($file,"First Name:");
+    fwrite($file, "firstname" ."\n");
+    fwrite($file,"Last Name:");
+    fwrite($file, "lastname" ."\n");
+    fwrite($file,"Gender:");
+    fwrite($file, "gender" ."\n");
+    fwrite($file,"USer Name:");
+    fwrite($file, "Uname" ."\n");
+    fwrite($file,"Password:");
+    fwrite($file, "pwd" ."\n");
+    fclose($file);
+?>
+</body>
+
+</html>
+##login##
+
+<?php
+   
+    
+    $file=fopen("features.txt","r");
+    $s1=fread($file,filesize("features.txt"));
+    $data=(explode("\n",$s1));
+   echo $data[3];
+   echo "<br>";
+   echo $data[4];
+    echo "<br>";
+
+    fclose($file);
+    
+    
+?>
+<html>
+
+<head>
+    <title> Login</title>
+</head>
+<body>
+<form method ="POST">
+
+<table>
+     <tr>
+         <td>
+             UserName
+         </td>
+        <td>
+             <input type="text" name="uname">
+          </td>
+    </tr>
+    <tr>
+         <td>
+             Password
+        </td>
+        <td>
+             <input type="Password" name="pwd">
+         </td>
+    </tr>
+    <tr>
+         <td>
+             <input  type="submit" name="Login" value="Login">
+        </td>
+    </tr>
+                
+
+      <tr>
+       <td>
+             <input  type="submit" name="SignUp" value="SignUp">
+         </td>        
+     </tr>
+ <?php
+
+if(isset($_POST["SignUp"]))
+{
+    echo "<script>location.href='file handling.php'</script>";
+}
+if(isset($_POST["Login"]))
+{
+    if($UserName=$data[3] or $Password=$data[4]){
+ echo "<script>location.href='Welcome.php'</script>";
+} 
+}
+?>
+</form>
+</body>
+</html>
+
+##welcome##
+<form method ="POST">
+ <input  type="submit" name="back" value="Back">
+ </form>
+ <?php
+ if(isset($_POST["back"]))
+{
+    echo "<script>location.href='Login.php'</script>";
+}
+?>
+
+##session
+
+<?php 
+
+	session_start();
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Session Example</title>
+</head>
+<body>
+
+	<h1>Session Example</h1>
+
+	<?php 
+
+		$_SESSION['username '] = 'rahat';
+		$_SESSION['password'] = "5555";
+
+		echo "User Id is: " . $_SESSION['userId'];
+		echo "<br>";
+		echo "Password is: " . $_SESSION['password'];
+
+		session_unset();
+		session_destroy();
+
+		/*echo "User Id is: " . $_SESSION['userId'];
+		echo "<br>";
+		echo "Password is: " . $_SESSION['password'];*/
+	?>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<?php
+   
+    
+    $file=fopen("features.txt","r");
+    $s1=fread($file,filesize("features.txt"));
+    $data=(explode("\n",$s1));
+   echo $data[3];
+   echo "<br>";
+   echo $data[4];
+    echo "<br>";
+
+    fclose($file);
+    
+    
+?>
+<html>
+
+<head>
+    <title> Login</title>
+</head>
+<body>
+<form method ="POST">
+
+<table>
+     <tr>
+         <td>
+             UserName
+         </td>
+        <td>
+             <input type="text" name="uname">
+          </td>
+    </tr>
+    <tr>
+         <td>
+             Password
+        </td>
+        <td>
+             <input type="Password" name="pwd">
+         </td>
+    </tr>
+    <tr>
+         <td>
+             <input  type="submit" name="Login" value="Login">
+        </td>
+    </tr>
+                
+
+      <tr>
+       <td>
+             <input  type="submit" name="SignUp" value="SignUp">
+         </td>        
+     </tr>
+ <?php
+
+if(isset($_POST["SignUp"]))
+{
+    echo "<script>location.href='file handling.php'</script>";
+}
+if(isset($_POST["Login"]))
+{
+    if($UserName=$data[3] or $Password=$data[4]){
+ echo "<script>location.href='Welcompage.php'</script>";
+} 
+}
+?>
+</form>
+</body>
+</html>
