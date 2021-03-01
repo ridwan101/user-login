@@ -59,7 +59,7 @@ if(isset($_POST["SignUp"]))
 if(isset($_POST["Login"]))
 {
     if($UserName=$data[3] or $Password=$data[4]){
- echo "<script>location.href='Welcompage.php'</script>";
+ echo "<script>location.href='Welcome.php'</script>";
 } 
 }
 ?>
